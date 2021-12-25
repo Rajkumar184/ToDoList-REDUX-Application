@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setTodo } from "../Redux/Action/ActionNames";
+import { setTodo, removeSelectedTodo } from "../Redux/Action/ActionNames";
 import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import ListItem from "./ListItem";
@@ -31,11 +31,15 @@ const MainTodo = () => {
 					</Button>
 					<br />
 					<ol>
-						{listItem.map((val, index) => {
-							return <ListItem key={index} val={val} />;
+						{listItem.map((val, id) => {
+							return <ListItem key={id} val={val} />;
 						})}
 					</ol>
-					<button type="button" className="btn btn-danger">
+					<button
+						type="button"
+						className="btn btn-danger"
+						onClick={() => dispatch(removeSelectedTodo())}
+					>
 						Remove All
 					</button>
 					<br />

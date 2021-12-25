@@ -1,8 +1,12 @@
-import { ActionTypes } from "../Constants/actionTypes";
+import {
+	SET_TODO,
+	DELETED_TODO,
+	REMOVE_SELECTED_TODO,
+} from "../Constants/actionTypes";
 
 export const setTodo = (data) => {
 	return {
-		type: ActionTypes.SET_TODO,
+		type: SET_TODO,
 		payload: {
 			id: new Date().getTime().toString(),
 			data: data,
@@ -10,14 +14,15 @@ export const setTodo = (data) => {
 	};
 };
 
-export const deletedTodo = () => {
+export const deletedTodo = (id) => {
 	return {
-		type: ActionTypes.DELETED_TODO,
+		type: DELETED_TODO,
+		payload: id,
 	};
 };
 
-export const removeSelectedProduct = () => {
+export const removeSelectedTodo = () => {
 	return {
-		type: ActionTypes.REMOVE_SELECTED_TODO,
+		type: REMOVE_SELECTED_TODO,
 	};
 };

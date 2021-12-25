@@ -1,11 +1,17 @@
-import { ActionTypes } from "../Constants/actionTypes";
+import {
+	SET_TODO,
+	DELETED_TODO,
+	REMOVE_SELECTED_TODO,
+} from "../Constants/actionTypes";
+import { toast } from "react-toastify";
+
 const intialState = {
 	list: [],
 };
 
 const Todos = (state = intialState, action) => {
 	switch (action.type) {
-		case ActionTypes.SET_TODO:
+		case SET_TODO:
 			const { id, data } = action.payload;
 			return {
 				...state,
@@ -17,13 +23,30 @@ const Todos = (state = intialState, action) => {
 					},
 				],
 			};
-		case ActionTypes.DELETED_TODO:
-			const newList = state.list.filter((elem) => elem.id === action.id);
+
+		case DELETED_TODO:
+			toast.success("Todo Deleted successfully!", {
+				position: toast.POSITION.TOP_CENTER,
+				autoClose: 3000,
+			});
+
+			const newList = [
+				...state.list.filter((elem) => elem.id !== action.payload),
+			];
 
 			return {
 				...state,
 				list: newList,
 			};
+
+		case REMOVE_SELECTED_TODO: {
+			toast.success("Your Todo List is Empty Now!", {
+				position: toast.POSITION.TOP_CENTER,
+				autoClose: 3000,
+			});
+
+			return { list: [] };
+		}
 		default:
 			return state;
 	}
