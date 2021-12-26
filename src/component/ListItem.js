@@ -8,7 +8,7 @@ const ListItem = ({ val }) => {
 	return (
 		<>
 			<div className="todo_style" key={val.id}>
-				<span key={val.id} onClick={() => dispatch(deletedTodo(val.id))}>
+				<span onClick={() => dispatch(deletedTodo(val.id))}>
 					<DeleteIcon className="deleteIcon" />
 				</span>
 				<li>

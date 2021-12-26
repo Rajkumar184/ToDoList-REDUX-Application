@@ -12,6 +12,37 @@ const intialState = {
 const Todos = (state = intialState, action) => {
 	switch (action.type) {
 		case SET_TODO:
+			const checkTodoLength = action.payload.data.length > 5;
+			const checkTodoExits = state.list?.find(
+				(e) => e.data === action.payload.data
+			);
+
+			if (checkTodoExits) {
+				toast.error(`${action.payload.data} is already present!`, {
+					position: toast.POSITION.TOP_CENTER,
+					autoClose: 3000,
+				});
+
+				return {
+					list: [...state.list],
+				};
+			} else if (!checkTodoLength) {
+				toast.error("Todo should have minimum 5 characters!", {
+					position: toast.POSITION.TOP_CENTER,
+					autoClose: 3000,
+				});
+
+				return {
+					list: [...state.list],
+				};
+			}
+
+			toast.success("Todo added successfully!", {
+				position: toast.POSITION.TOP_CENTER,
+				autoClose: 3000,
+			});
+
+			console.log(state.list);
 			const { id, data } = action.payload;
 			return {
 				...state,

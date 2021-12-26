@@ -31,8 +31,8 @@ const MainTodo = () => {
 					</Button>
 					<br />
 					<ol>
-						{listItem.map((val, id) => {
-							return <ListItem key={id} val={val} />;
+						{listItem?.map((val, id) => {
+							return <ListItem val={val} />;
 						})}
 					</ol>
 					<button
